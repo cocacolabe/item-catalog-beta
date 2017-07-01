@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <h1>Are you sure to delete Shelter: {{i.name}}?</h1>
+        <form action="{{url_for('deleteShelter', shelter_id=i.id)}}" method='post'>
+        <input type="submit" value='Delete'>
+        <a href="{{url_for('shelterList', shelter_id=i.id)}}">Cancel</a>
+        </form>
+    </body>
+</html>

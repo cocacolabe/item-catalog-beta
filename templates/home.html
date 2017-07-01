@@ -1,0 +1,101 @@
+   <html>
+       <header>
+        
+       <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<!-- Optional theme -->
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+       </header>
+<nav>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Login</a>
+  </li>
+
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Logout</a>
+  </li>
+</ul>
+
+</nav>
+
+       <body>
+          <section class="jumbotron text-center">
+            <div class="container">
+            <h1 class="jumbotron-heading">{{shelter.name}}</h1>
+        <p class="lead text-muted">{{shelter.address}}, {{shelter.state}} {{shelter.zipCode}}</p>
+        <p>
+          <a href="#" class="btn btn-outline-primary">Add New Pet</a>
+          
+        </p>
+      </div>
+    </section>
+
+           <!--MESSAGE FLASHING
+           "with" construct=> a block that does some automatic clean-up-->
+           {% with messages = get_flashed_messages() %}
+           {% if messages %}
+
+            <ul>
+                {% for message in messages %}
+                <li><Strong>{{message}}</Strong></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+<div class="container-fluid">
+<div class="mx-auto" style="width:auto;">
+<div class="row ">
+           {% for i in puppies %}
+
+ 
+  <!-- Default panel contents -->
+    
+    <div class="card col-md-3" >
+      
+      
+   
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=150px height=150px /></li>
+    <li class="list-group-item">ID: {{i.id}}</li>
+    <li class="list-group-item">Name: {{i.name}}</li>
+    <li class="list-group-item">Gender: {{i.gender}}</li>
+    <li class="list-group-item">Birthdate: {{i.dateOfBirth}}</li>
+    <li class="list-group-item">Weight: {{i.weight}}</li>
+    <li class="list-group-item" ><a class="btn btn-outline-info "href='{{url_for('editPet', shelter_id = shelter.id, pet_id = i.id) }}'>Edit</a></li>
+    <li class="list-group-item"><a class="btn btn-outline-danger"href='{{url_for('deletePet', shelter_id = shelter.id, pet_id = i.id) }}'>Delete</a></li>
+  </ul>
+ <hr>
+  </div>
+
+         {% endfor %}
+         
+  </div>
+  </div>    
+  </div>
+  </br>     
+       </body>
+   </html>
+   
+  <!-- output = ''
+    for i in puppies:
+        
+        output += i.name
+        output += '</br>'
+        output += i.gender
+        output += '</br>'
+        output += str(i.weight)
+        output += '</br>'
+        # Some picture not shown, see puppypopulator.py file ==> puppy_images
+        output += '<img src="' + i.picture + '" height="100" width="100"/>'
+        output += '</br>'
+        output += '</br>'
+
+    return output -->

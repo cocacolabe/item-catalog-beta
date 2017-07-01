@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <h1>Edit Pet</h1>
+        <form action="{{ url_for('editPet', shelter_id=shelter_id, pet_id=i.id)}}" method="post">
+            <p>Name</p>
+            <input type="text" size='50' name='name' value="{{i.name}}">
+            <p>Gender</p>
+            <input type="text" name="gender"  value="{{i.gender}}"> <br>
+            <!--<input type="radio" name="gender" value="female" value="{{i.gender}}"> Female<br>-->
+            <p>Date of Birth</p>
+            <input type="date" size='50' name='dateofbirth' value="{{i.dateOfBirth.strftime('%Y-%m-%d')}}">
+            <p>Weight</p>
+            <input type="text" size='50' name='weight' value="{{i.weight}}">
+            <p>Picture URL</p>
+            <input type="text" size='50' name='picture' value="{{i.picture}}" ></br>
+            <input type='submit' value='Edit'> 
+            <form>
+                <a href="{{url_for('shelterList', shelter_id=i.shelter_id)}}">Cancel</a>
+            </form>
+        </form>
+    </body>
+    
+</html>

@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <h1>Add a New Pet</h1>
+          <form action="{{ url_for('newPet', shelter_id=shelter_id)}}" method="post">
+            <p>Name</p>
+            <input type="text" size='50' name='name'>
+            <p>Gender</p>
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            <p>Date of Birth</p>
+            <input type="date" size='50' name='dateofbirth'>
+            <p>Weight</p>
+            <input type="text" size='50' name='weight'>
+            <p>Picture URL</p>
+            <input type="text" size='50' name='picture'></br>
+            <input type='submit' value='Add'>
+        </form>
+    </body>
+    
+</html>

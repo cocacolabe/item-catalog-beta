@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <h1>Edit Shelter</h1>
+        <form action="{{ url_for('editShelter', shelter_id=i.id)}}" method="post">
+            <p>Name</p>
+            <input type="text" size='50' name='name' value="{{i.name}}">
+            <p>Address</p>
+            <input type="text" size='50' name="address"  value="{{i.address}}"> 
+            <p>City</p>
+            <input type="text" size='50' name='city' value="{{i.city}}">
+            <p>State</p>
+            <input type="text" size='50' name='state' value="{{i.state}}">
+            <p>Zip Code</p>
+            <input type="text" size='50' name='zipcode' value="{{i.zipcode}}" >
+            <p>Website</p>
+            <input type="text" size='50' name='website' value="{{i.website}}" >
+            
+            </br>
+            <input type='submit' value='Edit'> 
+            <form>
+                <a href="{{url_for('shelterList', shelter_id=shelter_id)}}">Cancel</a>
+            </form>
+        </form>
+    </body>
+    
+</html>
