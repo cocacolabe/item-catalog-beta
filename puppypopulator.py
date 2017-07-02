@@ -1,14 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
  
-from database_setup import Base, Shelter, Puppy
+from database_setup import Base, Shelter, Puppy, User
 #from flask.ext.sqlalchemy import SQLAlchemy
 from random import randint
 import datetime
 import random
 
 
-engine = create_engine('sqlite:///puppyshelter.db')
+engine = create_engine('sqlite:///petshelterwithuser.db')
 
 Base.metadata.bind = engine
  

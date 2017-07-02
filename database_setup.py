@@ -7,6 +7,14 @@ from sqlalchemy import create_engine
  
 Base = declarative_base()
 
+class User(Base):
+    __tablename__ = 'user'
+   
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    picture = Column(String(250))
+
 class Shelter(Base):
     __tablename__ = 'shelter'
     id = Column(Integer, primary_key = True)
@@ -16,6 +24,8 @@ class Shelter(Base):
     state = Column(String(20))
     zipCode = Column(String(5))
     website = Column(String)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -39,6 +49,8 @@ class Puppy(Base):
     shelter_id = Column(Integer, ForeignKey('shelter.id'))
     shelter = relationship(Shelter)
     weight = Column(Numeric(2))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
 # Add serialize function to be able to send Json object
     @property
@@ -51,7 +63,7 @@ class Puppy(Base):
             'picture':self.picture
         }
 
-engine = create_engine('sqlite:///puppyshelter.db')
+engine = create_engine('sqlite:///petshelterwithuser.db')
  
 
 Base.metadata.create_all(engine)
