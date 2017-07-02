@@ -206,9 +206,11 @@ def newShelter():
             state=request.form['state'],
             zipCode=request.form['zipcode'],
             website=request.form['website'],
+            user_id=login_session['user_id']
         )
         session.add(newShelter)
         session.commit()
+        flash('New Shelter Added!')
         return redirect(url_for('allShelterList'))
     else:
         return render_template('newshelter.html')
@@ -216,11 +218,13 @@ def newShelter():
 # Edit shelter
 
 
-@app.route('/shelters/<int:shelter_id>/edit', methods=['GET', 'POST'])
+@app.route('/shelters/<int:shelter_id>/edit/', methods=['GET', 'POST'])
 def editShelter(shelter_id):
+    editedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if 'username' not in login_session:
         return redirect('/login')
-    editedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    if editedShelter.user_id != login_session['user_id']:
+         return redirect('/login')
     if request.method == 'POST':
         if request.form['name']:
             editedShelter.name = request.form['name']
@@ -247,18 +251,20 @@ def editShelter(shelter_id):
 #   Delete shelter
 
 
-@app.route('/shelters/<int:shelter_id>/delete',
+@app.route('/shelters/<int:shelter_id>/delete/',
            methods=[
                'GET',
                'POST'])
 def deleteShelter(shelter_id):
+    deletedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if 'username' not in login_session:
         return redirect('/login')
-    deletedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    if deletedShelter.user_id != login_session['user_id']:
+        return redirect('/login')    
     if request.method == 'POST':
         session.delete(deletedShelter)
         session.commit()
-        flash("pet has been deleted")
+        flash("Shelter has been deleted")
         return redirect(url_for('shelterList', shelter_id=shelter_id))
     else:
         return render_template('deleteshelter.html', i=deletedShelter)
@@ -270,7 +276,6 @@ def deleteShelter(shelter_id):
 @app.route('/shelters/<int:shelter_id>/list')
 def shelterList(shelter_id):
     shelter = session.query(Shelter).filter_by(id=shelter_id).one()
-    print shelter
     #   protect each menu based on whoever created it.
     creator = getUserInfo(shelter.user_id)
     puppies = session.query(Puppy).filter_by(shelter_id=shelter.id).all()
@@ -287,11 +292,13 @@ def shelterList(shelter_id):
 
 
 #   Add a new pet
-@app.route('/shelters/<int:shelter_id>/new/', methods=['GET', 'POST'])
+@app.route('/shelters/<int:shelter_id>/list/new/', methods=['GET', 'POST'])
 def newPet(shelter_id):
+    shelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if 'username' not in login_session:
         return redirect('/login')
-    shelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    if shelter.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         addnew = Puppy(
             name=request.form['name'],
@@ -301,7 +308,8 @@ def newPet(shelter_id):
             gender=request.form['gender'],
             weight=request.form['weight'],
             picture=request.form['picture'],
-            shelter_id=shelter_id)
+            shelter_id=shelter_id,
+            user_id=shelter.user_id)
         session.add(addnew)
         session.commit()
         flash("New Pet created")
@@ -319,10 +327,12 @@ def newPet(shelter_id):
         'GET',
         'POST'])
 def editPet(shelter_id, pet_id):
-    if 'username' not in login_session:
-        return redirect('/login')
     editedPet = session.query(Puppy).filter_by(id=pet_id).one()
     shelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    if 'username' not in login_session:
+        return redirect('/login')
+    if shelter.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         if request.form['name']:
             editedPet.name = request.form['name']
@@ -352,9 +362,12 @@ def editPet(shelter_id, pet_id):
 @app.route(
     '/shelters/<int:shelter_id>/<int:pet_id>/delete/', methods=['GET', 'POST'])
 def deletePet(shelter_id, pet_id):
+    shelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    deletedPet = session.query(Puppy).filter_by(id=pet_id).one()
     if 'username' not in login_session:
         return redirect('/login')
-    deletedPet = session.query(Puppy).filter_by(id=pet_id).one()
+    if shelter.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         session.delete(deletedPet)
         session.commit()
