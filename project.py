@@ -27,6 +27,8 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Create anti-forgery state token
+
+
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -174,6 +176,8 @@ def eachPetJSON(shelter_id, pet_id):
 #   --------  JSON FILE END--------
 
 # Shelter List
+
+
 @app.route('/')
 @app.route('/shelters/')
 def allShelterList():
@@ -188,6 +192,8 @@ def allShelterList():
         return render_template('allshelterlist.html', allshelter=allshelter)
 
 # Add a new Shelter
+
+
 @app.route('/shelters/new/', methods=['GET', 'POST'])
 def newShelter():
     if 'username' not in login_session:
@@ -208,7 +214,9 @@ def newShelter():
         return render_template('newshelter.html')
 
 # Edit shelter
-@app.route('/shelters/<int:shelter_id>/edit', methods=['GET','POST'])
+
+
+@app.route('/shelters/<int:shelter_id>/edit', methods=['GET', 'POST'])
 def editShelter(shelter_id):
     if 'username' not in login_session:
         return redirect('/login')
@@ -219,9 +227,9 @@ def editShelter(shelter_id):
         if request.form['address']:
             editedShelter.address = request.form['address']
         if request.form['city']:
-            editedShelter.city =  request.form['city']
+            editedShelter.city = request.form['city']
         if request.form['state']:
-            editedShelter.state =  request.form['state']
+            editedShelter.state = request.form['state']
         if request.form['zipcode']:
             editedShelter.zipCode = request.form['zipcode']
         if request.form['website']:
@@ -237,11 +245,13 @@ def editShelter(shelter_id):
             i=editedShelter)
 
 #   Delete shelter
+
+
 @app.route('/shelters/<int:shelter_id>/delete',
-    methods=[
-        'GET',
-        'POST'])
-def deleteShelter(shelter_id): 
+           methods=[
+               'GET',
+               'POST'])
+def deleteShelter(shelter_id):
     if 'username' not in login_session:
         return redirect('/login')
     deletedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
@@ -254,10 +264,13 @@ def deleteShelter(shelter_id):
         return render_template('deleteshelter.html', i=deletedShelter)
 
 # show pet lists
+
+
 @app.route('/shelters/<int:shelter_id>/')
 @app.route('/shelters/<int:shelter_id>/list')
 def shelterList(shelter_id):
     shelter = session.query(Shelter).filter_by(id=shelter_id).one()
+    print shelter
     #   protect each menu based on whoever created it.
     creator = getUserInfo(shelter.user_id)
     puppies = session.query(Puppy).filter_by(shelter_id=shelter.id).all()
@@ -266,7 +279,11 @@ def shelterList(shelter_id):
             'publicpetlist.html',
             shelter=shelter, creator=creator, puppies=puppies)
     else:
-        return render_template('home.html', shelter=shelter, puppies=puppies, creator=creator)
+        return render_template(
+            'home.html',
+            shelter=shelter,
+            puppies=puppies,
+            creator=creator)
 
 
 #   Add a new pet
@@ -274,6 +291,7 @@ def shelterList(shelter_id):
 def newPet(shelter_id):
     if 'username' not in login_session:
         return redirect('/login')
+    shelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if request.method == 'POST':
         addnew = Puppy(
             name=request.form['name'],
@@ -302,8 +320,9 @@ def newPet(shelter_id):
         'POST'])
 def editPet(shelter_id, pet_id):
     if 'username' not in login_session:
-       return redirect('/login')
+        return redirect('/login')
     editedPet = session.query(Puppy).filter_by(id=pet_id).one()
+    shelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if request.method == 'POST':
         if request.form['name']:
             editedPet.name = request.form['name']
@@ -328,9 +347,11 @@ def editPet(shelter_id, pet_id):
             i=editedPet)
 
 #   Delete pet
+
+
 @app.route(
-    '/shelters/<int:shelter_id>/<int:pet_id>/delete/',methods=['GET','POST'])
-def deletePet(shelter_id, pet_id): 
+    '/shelters/<int:shelter_id>/<int:pet_id>/delete/', methods=['GET', 'POST'])
+def deletePet(shelter_id, pet_id):
     if 'username' not in login_session:
         return redirect('/login')
     deletedPet = session.query(Puppy).filter_by(id=pet_id).one()
@@ -366,6 +387,8 @@ def createUser(login_session):
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
+
+
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True

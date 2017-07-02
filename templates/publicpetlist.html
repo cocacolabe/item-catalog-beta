@@ -1,50 +1,97 @@
-<div class="row top-menu">
-		<div class="col-md-10"></div>
-		<div class="col-md-2 text-right">
-			<a href="{{url_for('showLogin')}}">Click Here to Log in </a>
-		</div>
-	</div>
-	<div class="row divider blue">
-		<div class="col-md-12"></div>
-	</div>
-	<div class="row banner main">
-		<div class="col-md-1"></div>
-		<div class="col-md-11 padding-none">
-			<h1>Public Pet list</h1>
-		</div>
-	</div>
+   <html>
+       <header>
+        
+       <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-	<div class = 'flash'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-          
-        <ul>
-        {% for message in messages %}
-            <li> <strong> {{ message }} </strong> </li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-    {% endwith %}
-
-</div>
+<!-- Optional theme -->
 
 
-	
-	<div class="row padding-top padding-bottom">
-		<div class="col-md-1"></div>
-		<div class="col-md-10 padding-none">
-			
-		</div>
-		<div class="col-md-1"></div>
-	</div>
-	{% for restaurant in restaurants %}
-		<a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}">
-			<div class="row">
-				<div class="col-md-1"></div>
-					<div class="col-md-10 restaurant-list">
-						<h3>{{restaurant.name}}</h3>
-					</div>
-				<div class="col-md-1"></div>
-			</div>
-		</a>
-	{% endfor %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+       </header>
+<nav>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Login</a>
+  </li>
+
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Logout</a>
+  </li>
+</ul>
+
+</nav>
+
+       <body>
+          <section class="jumbotron text-center">
+            <div class="container">
+            <h1 class="jumbotron-heading">{{shelter.name}}</h1>
+        <p class="lead text-muted">{{shelter.address}}, {{shelter.state}} {{shelter.zipCode}}</p>
+    
+      </div>
+    </section>
+
+           <!--MESSAGE FLASHING
+           "with" construct=> a block that does some automatic clean-up-->
+           {% with messages = get_flashed_messages() %}
+           {% if messages %}
+
+            <ul>
+                {% for message in messages %}
+                <li><Strong>{{message}}</Strong></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+<div class="container-fluid">
+<div class="mx-auto" style="width:auto;">
+<div class="row ">
+           {% for i in puppies %}
+
+ 
+  <!-- Default panel contents -->
+    
+    <div class="card col-md-3" >
+      
+      
+   
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=150px height=150px /></li>
+    <li class="list-group-item">ID: {{i.id}}</li>
+    <li class="list-group-item">Name: {{i.name}}</li>
+    <li class="list-group-item">Gender: {{i.gender}}</li>
+    <li class="list-group-item">Birthdate: {{i.dateOfBirth}}</li>
+    <li class="list-group-item">Weight: {{i.weight}}</li>
+   
+  </ul>
+ <hr>
+  </div>
+
+         {% endfor %}
+         
+  </div>
+  </div>    
+  </div>
+  </br>     
+       </body>
+   </html>
+   
+  <!-- output = ''
+    for i in puppies:
+        
+        output += i.name
+        output += '</br>'
+        output += i.gender
+        output += '</br>'
+        output += str(i.weight)
+        output += '</br>'
+        # Some picture not shown, see puppypopulator.py file ==> puppy_images
+        output += '<img src="' + i.picture + '" height="100" width="100"/>'
+        output += '</br>'
+        output += '</br>'
+
+    return output -->

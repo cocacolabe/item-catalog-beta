@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
- 
+from sqlalchemy.orm import sessionmaker 
 from database_setup import Base, Shelter, Puppy, User
 #from flask.ext.sqlalchemy import SQLAlchemy
 from random import randint
@@ -16,6 +15,11 @@ DBSession = sessionmaker(bind=engine)
 
 session = DBSession()
 
+# Create dummy user
+User1 = User(name="Robo Barista", email="tinnyTim@udacity.com",
+             picture='https://pbs.twimg.com/profile_images/2671170543/18debd694829ed78203a5a36dd364160_400x400.png')
+session.add(User1)
+session.commit()
 
 #Add Shelters
 shelter1 = Shelter(name = "Oakland Animal Services", address = "1101 29th Ave", city = "Oakland", state = "California", zipCode = "94601", website = "oaklandanimalservices.org")
