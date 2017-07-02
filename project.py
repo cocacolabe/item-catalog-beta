@@ -178,11 +178,20 @@ def eachPetJSON(shelter_id, pet_id):
 @app.route('/shelters/')
 def allShelterList():
     allshelter = session.query(Shelter).order_by(asc(Shelter.name))
-    return render_template('allshelterlist.html', allshelter=allshelter)
+    # Check to see if the user is 'not' in loggin session, then direct to
+    # public page.
+    if 'username' not in login_session:
+        return render_template(
+            'publicshelterlist.html',
+            allshelter=allshelter)
+    else:
+        return render_template('allshelterlist.html', allshelter=allshelter)
 
 # Add a new Shelter
 @app.route('/shelters/new/', methods=['GET', 'POST'])
 def newShelter():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         newShelter = Shelter(
             name=request.form['name'],
@@ -201,6 +210,8 @@ def newShelter():
 # Edit shelter
 @app.route('/shelters/<int:shelter_id>/edit', methods=['GET','POST'])
 def editShelter(shelter_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -231,6 +242,8 @@ def editShelter(shelter_id):
         'GET',
         'POST'])
 def deleteShelter(shelter_id): 
+    if 'username' not in login_session:
+        return redirect('/login')
     deletedShelter = session.query(Shelter).filter_by(id=shelter_id).one()
     if request.method == 'POST':
         session.delete(deletedShelter)
@@ -240,16 +253,27 @@ def deleteShelter(shelter_id):
     else:
         return render_template('deleteshelter.html', i=deletedShelter)
 
+# show pet lists
+@app.route('/shelters/<int:shelter_id>/')
 @app.route('/shelters/<int:shelter_id>/list')
 def shelterList(shelter_id):
     shelter = session.query(Shelter).filter_by(id=shelter_id).one()
-    puppies = session.query(Puppy).filter_by(shelter_id=shelter.id)
-    return render_template('home.html', shelter=shelter, puppies=puppies)
+    #   protect each menu based on whoever created it.
+    creator = getUserInfo(shelter.user_id)
+    puppies = session.query(Puppy).filter_by(shelter_id=shelter.id).all()
+    if 'username' not in login_session or creator.id != login_session['user_id']:
+        return render_template(
+            'publicpetlist.html',
+            shelter=shelter, creator=creator, puppies=puppies)
+    else:
+        return render_template('home.html', shelter=shelter, puppies=puppies, creator=creator)
 
 
 #   Add a new pet
 @app.route('/shelters/<int:shelter_id>/new/', methods=['GET', 'POST'])
 def newPet(shelter_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         addnew = Puppy(
             name=request.form['name'],
@@ -277,6 +301,8 @@ def newPet(shelter_id):
         'GET',
         'POST'])
 def editPet(shelter_id, pet_id):
+    if 'username' not in login_session:
+       return redirect('/login')
     editedPet = session.query(Puppy).filter_by(id=pet_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -305,6 +331,8 @@ def editPet(shelter_id, pet_id):
 @app.route(
     '/shelters/<int:shelter_id>/<int:pet_id>/delete/',methods=['GET','POST'])
 def deletePet(shelter_id, pet_id): 
+    if 'username' not in login_session:
+        return redirect('/login')
     deletedPet = session.query(Puppy).filter_by(id=pet_id).one()
     if request.method == 'POST':
         session.delete(deletedPet)

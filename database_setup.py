@@ -48,7 +48,7 @@ class Puppy(Base):
     picture = Column(String)
     shelter_id = Column(Integer, ForeignKey('shelter.id'))
     shelter = relationship(Shelter)
-    weight = Column(Numeric(2))
+    weight = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
