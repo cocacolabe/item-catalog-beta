@@ -1,6 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
- 
+
+
+<!--jumbotron -->
           <section class="jumbotron text-center">
             <div class="container">
             <h1 class="jumbotron-heading">{{shelter.name}}</h1>
@@ -29,13 +31,13 @@
  
   <!-- Default panel contents -->
     
-    <div class="card col-md-3" >
+    <div class="card col-md-4" >
       
       
    
 
   <!-- List group -->
-  <ul class="list-group">
+  <ul class="list-group list-group-item-success">
     <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=150px height=150px /></li>
     <li class="list-group-item">ID: {{i.id}}</li>
     <li class="list-group-item">Name: {{i.name}}</li>
