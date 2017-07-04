@@ -17,11 +17,19 @@
                     <a class="nav-link active float-left" href="{{url_for('allShelterList')}}">
                     <i class="fa fa-codepen fa-2x" aria-hidden="true"></i> US Adoption System</a>
                 </li>
-
-                <li class="nav-item ">
+                {%if 'username' not in session %}
+			    <li class="nav-item ">
                     <a class="nav-link active" href="{{url_for('showLogin')}}">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>Login</a>
+                    <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i> Login</a>
                 </li>
+			{% else %}
+            	<li class="nav-item ">
+                    <a class="nav-link active" href="{{url_for('disconnect')}}">
+                    <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Logout</a>
+                </li>
+			
+			{% endif %}
+                
 
         </ul>
 

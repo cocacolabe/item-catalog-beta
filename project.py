@@ -106,9 +106,14 @@ def gconnect():
 
     data = answer.json()
 
+    # Store user loggin data in login session
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
+    login_session['provider'] = 'google'
+    login_session['gplus_id'] = 'gplus_id'
+    login_session['access_token'] = 'access_token'
+
 
     # See if user existm if it doesn't make a new one
     user_id = getUserID(login_session['email'])
@@ -132,17 +137,24 @@ def gconnect():
 
 @app.route('/gdisconnect')
 def gdisconnect():
-    credentials = login_session.get('credentials')
-    if credentials is None:
+    # credentials = login_session.get('credentials')
+    c = login_session['access_token']
+    if c is None:
         response = make_response(
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    access_token = credentials.access_token
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
+    #access_token = credentials.access_token
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     if result['status'] != '200':
+
+
+        response = make_response(json.dumps('Successfully disconnected.'), 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    else:    
         # For whatever reason, the given token was invalid.
         response = make_response(
             json.dumps('Failed to revoke token for given user.'), 400)
@@ -400,6 +412,25 @@ def createUser(login_session):
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
+
+# Disconnect based on provider
+@app.route('/disconnect')
+def disconnect():
+    if 'provider' in login_session:
+        if login_session['provider'] == 'google':
+            gdisconnect()
+         # Reset the user's session:
+            del login_session['access_token']
+            del login_session['gplus_id']
+            del login_session['username']
+            del login_session['email']
+            del login_session['picture']
+
+        flash("You have successfully been logged out.")
+        return redirect(url_for('allShelterList'))
+    else:
+        flash("You were not logged in")
+        return redirect(url_for('allShelterList'))
 
 
 if __name__ == '__main__':
