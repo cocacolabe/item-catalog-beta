@@ -1,33 +1,7 @@
-
-
-<!--<html>
-    <body>
-        <h1>Add a New Shelter</h1>
-        <form action="#" method="post">
-      
-            <p>Name</p>
-            <input type="text" size='50' name='name'>
-            <p>Address</p>
-            <input type="text" size='50' name='address'>
-            <p>City</p>
-            <input type="text" size='50' name='city'>
-            <p>state</p>
-            <input type="text" size='50' name='state'>
-            <p>zipcode</p>
-            <input type="text" size='50' name='zipcode'>
-            <p>Website</p>
-            <input type="text" size='50' name='website'>
-            </br>
-            <input type='submit' value='Add'>
-        </form>
-    </body>
-    
-</html>-->
-
 {% extends "main.html" %}
 {% block content %}
 
-<section class="jumbotron text-center ">
+<section class="jumbotron text-center" id="jumbotron-form-adj">
 	<div class="container">
 		<h1 class="jumbotron-heading ">Add New Shelter</h1>
 
@@ -40,7 +14,7 @@
 <div class="form-group row">
   <label for="example-text-input" class="col-2 col-form-label">Name</label>
   <div class="col-10">
-    <input class="form-control" type="text" name='name' >
+    <input class="form-control" type="text" name='name' required>
   </div>
 </div>
 <div class="form-group row">
@@ -73,7 +47,9 @@
     <input class="form-control" type="url" name='website'>
   </div>
 </div>
-<button type="submit" class="btn btn-primary">Add New Shelter</button>
+
+  <button type="submit" class="btn btn-primary">Add New Shelter</button>
+
 </form>
 
 {% endblock %}

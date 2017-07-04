@@ -1,20 +1,60 @@
-<html>
-    <body>
-        <h1>Add a New Pet</h1>
-          <form action="{{ url_for('newPet', shelter_id=shelter_id)}}" method="post">
-            <p>Name</p>
-            <input type="text" size='50' name='name'>
-            <p>Gender</p>
-            <input type="radio" name="gender" value="male"> Male<br>
-            <input type="radio" name="gender" value="female"> Female<br>
-            <p>Date of Birth</p>
-            <input type="date" size='50' name='dateofbirth'>
-            <p>Weight</p>
-            <input type="text" size='50' name='weight'>
-            <p>Picture URL</p>
-            <input type="text" size='50' name='picture'></br>
-            <input type='submit' value='Add'>
-        </form>
-    </body>
-    
-</html>
+
+
+{% extends "main.html" %}
+{% block content %}
+
+<section class="jumbotron text-center" id="jumbotron-form-adj">
+	<div class="container">
+		<h1 class="jumbotron-heading ">Add New Pet</h1>
+
+
+	</div>
+</section>
+
+
+<form action="{{ url_for('newPet', shelter_id=shelter_id)}}" method="post" class="form-adjust">
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Name</label>
+  <div class="col-10">
+    <input class="form-control" type="text" name='name' required>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Birth Date</label>
+  <div class="col-10">
+    <input class="form-control" type="date" name='dateofbirth'>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Gender</label>
+  <div class="col-10">
+        <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="gender" id="optionsRadios1" value="Female">
+        Girl
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="gender" id="optionsRadios2" value="Male">
+        Boy
+      </label>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-number-input" class="col-2 col-form-label">Weight</label>
+  <div class="col-10">
+    <input class="form-control" type="number" name='weight' id="example-number-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-url-input" class="col-2 col-form-label">Picture URL</label>
+  <div class="col-10">
+    <input class="form-control" type="url" name='picture'>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Add New Pet</button>
+</form>
+
+{% endblock %}

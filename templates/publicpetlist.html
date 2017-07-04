@@ -3,7 +3,7 @@
 {% include "carousel.html" %}
 
 <!--jumbotron -->
-          <section class="jumbotron text-center">
+          <section class="jumbotron text-center" id="jumbotron-main">
             <div class="container">
             <h1 class="jumbotron-heading">{{shelter.name}}</h1>
         <p class="lead text-muted">{{shelter.address}}, {{shelter.state}} {{shelter.zipCode}}</p>
@@ -38,7 +38,7 @@
 
   <!-- List group -->
   <ul class="list-group list-group-item-success">
-    <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=150px height=150px /></li>
+    <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=300px height=auto /></li>
     <li class="list-group-item">ID: {{i.id}}</li>
     <li class="list-group-item">Name: {{i.name}}</li>
     <li class="list-group-item">Gender: {{i.gender}}</li>
