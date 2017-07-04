@@ -9,7 +9,19 @@
           <a href="#" class="btn btn-outline-primary">Add New Shelter</a>
           
         </p>
+        </p>
+        <!--MESSAGE FLASHING
+           "with" construct=> a block that does some automatic clean-up-->
+           {% with messages = get_flashed_messages() %}
+           {% if messages %}
 
+            <p>
+                {% for message in messages %}
+                <Strong>{{message}}</Strong>
+                {% endfor %}
+            </p>
+            {% endif %}
+            {% endwith %}
 	</div>
 </section>
 
