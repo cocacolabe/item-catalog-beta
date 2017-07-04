@@ -1,15 +1,10 @@
 {% extends "main.html" %}
 {% block content %}
 
+
 <section class="jumbotron text-center" id="jumbotron-form-adj">
 	<div class="container">
-		<h1 class="jumbotron-heading ">Add New Shelter</h1>
-
-
-	</div>
-</section>
-
-
+<h1 class="jumbotron-heading ">Add New Shelter</h1></br>
 <form action="#" method="post" class="form-adjust">
 <div class="form-group row">
   <label for="example-text-input" class="col-2 col-form-label">Name</label>
@@ -18,7 +13,7 @@
   </div>
 </div>
 <div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label">Address</label>
+  <label for="example-text-input" class="col-2 col-form-label">Addr.</label>
   <div class="col-10">
     <input class="form-control" type="text" name='address' >
   </div>
@@ -42,7 +37,7 @@
   </div>
 </div>
 <div class="form-group row">
-  <label for="example-url-input" class="col-2 col-form-label">Website</label>
+  <label for="example-url-input" class="col-2 col-form-label">URL</label>
   <div class="col-10">
     <input class="form-control" type="url" name='website'>
   </div>
@@ -51,5 +46,7 @@
   <button type="submit" class="btn btn-primary">Add New Shelter</button>
 
 </form>
+	</div>
+</section>
 
 {% endblock %}

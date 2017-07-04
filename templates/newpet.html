@@ -1,17 +1,10 @@
-
-
 {% extends "main.html" %}
 {% block content %}
 
+
 <section class="jumbotron text-center" id="jumbotron-form-adj">
 	<div class="container">
-		<h1 class="jumbotron-heading ">Add New Pet</h1>
-
-
-	</div>
-</section>
-
-
+		<h1 class="jumbotron-heading ">Add New Pet</h1></br>
 <form action="{{ url_for('newPet', shelter_id=shelter_id)}}" method="post" class="form-adjust">
 <div class="form-group row">
   <label for="example-text-input" class="col-2 col-form-label">Name</label>
@@ -56,5 +49,7 @@
 </div>
 <button type="submit" class="btn btn-primary">Add New Pet</button>
 </form>
+	</div>
+</section>
 
 {% endblock %}

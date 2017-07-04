@@ -1,23 +1,57 @@
-<html>
-    <body>
-        <h1>Edit Pet</h1>
-        <form action="{{ url_for('editPet', shelter_id=shelter_id, pet_id=i.id)}}" method="post">
-            <p>Name</p>
-            <input type="text" size='50' name='name' value="{{i.name}}">
-            <p>Gender</p>
-            <input type="text" name="gender"  value="{{i.gender}}"> <br>
-            <!--<input type="radio" name="gender" value="female" value="{{i.gender}}"> Female<br>-->
-            <p>Date of Birth</p>
-            <input type="date" size='50' name='dateofbirth' value="{{i.dateOfBirth.strftime('%Y-%m-%d')}}">
-            <p>Weight</p>
-            <input type="text" size='50' name='weight' value="{{i.weight}}">
-            <p>Picture URL</p>
-            <input type="text" size='50' name='picture' value="{{i.picture}}" ></br>
-            <input type='submit' value='Edit'> 
-            <form>
-                <a href="{{url_for('shelterList', shelter_id=i.shelter_id)}}">Cancel</a>
-            </form>
-        </form>
-    </body>
-    
-</html>
+
+{% extends "main.html" %}
+{% block content %}
+
+
+<section class="jumbotron text-center" id="jumbotron-form-adj">
+	<div class="container">
+		<h1 class="jumbotron-heading ">Add New Pet</h1></br>
+<form action="{{url_for('editPet', shelter_id=shelter_id, pet_id=i.id)}}" method="post" class="form-adjust">
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Name</label>
+  <div class="col-10">
+    <input class="form-control" type="text" name='name' value="{{i.name}}" required>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Birth Date</label>
+  <div class="col-10">
+    <input class="form-control" type="date" name='dateofbirth' value="{{i.dateOfBirth.strftime('%Y-%m-%d')}}">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Gender</label>
+  <div class="col-10">
+        <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="gender" id="optionsRadios1" value="Female" {% if i.gender|length == 6 %} checked {% endif %}>
+        Girl
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="gender" id="optionsRadios2" value="Male" {% if i.gender|length == 4 %} checked {% endif %}>
+        Boy
+      </label>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-number-input" class="col-2 col-form-label">Weight</label>
+  <div class="col-10">
+    <input class="form-control" type="number" name='weight' value="{{i.weight}}">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-url-input" class="col-2 col-form-label">Picture URL</label>
+  <div class="col-10">
+    <input class="form-control" type="url" name='picture' value="{{i.picture}}">
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Edit</button>
+<a href="{{url_for('shelterList', shelter_id=i.id)}}" class="btn btn-info">Cancel</a>
+</form>
+	</div>
+</section>
+
+{% endblock %}
