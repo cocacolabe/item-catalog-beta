@@ -32,5 +32,15 @@
 
 .carousel{
 
-    margin-top: 62px;
+    margin-top: 107px;
+}
+
+
+
+.carousel-caption{
+    position: absolute;
+    left:0;
+    width:25%;
+    top:2%;
+    margin-left:5%;
 }
