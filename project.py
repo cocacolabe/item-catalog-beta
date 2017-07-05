@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request,
+    redirect, url_for, flash, jsonify
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Shelter, Puppy, User
@@ -114,7 +115,6 @@ def gconnect():
     login_session['gplus_id'] = 'gplus_id'
     login_session['access_token'] = 'access_token'
 
-
     # See if user existm if it doesn't make a new one
     user_id = getUserID(login_session['email'])
     if not user_id:
@@ -125,9 +125,6 @@ def gconnect():
     output += '<h1>Welcome, '
     output += login_session['username']
     output += '!</h1>'
-    # output += '<img src="'
-    # output += login_session['picture']
-    # output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -144,17 +141,16 @@ def gdisconnect():
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    #access_token = credentials.access_token
+    # access_token = credentials.access_token
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     if result['status'] != '200':
 
-
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
-    else:    
+    else:
         # For whatever reason, the given token was invalid.
         response = make_response(
             json.dumps('Failed to revoke token for given user.'), 400)
@@ -236,7 +232,7 @@ def editShelter(shelter_id):
     if 'username' not in login_session:
         return redirect('/login')
     if editedShelter.user_id != login_session['user_id']:
-         return redirect('/login')
+        return redirect('/login')
     if request.method == 'POST':
         if request.form['name']:
             editedShelter.name = request.form['name']
@@ -272,7 +268,7 @@ def deleteShelter(shelter_id):
     if 'username' not in login_session:
         return redirect('/login')
     if deletedShelter.user_id != login_session['user_id']:
-        return redirect('/login')    
+        return redirect('/login')
     if request.method == 'POST':
         session.delete(deletedShelter)
         session.commit()
@@ -414,12 +410,14 @@ def createUser(login_session):
     return user.id
 
 # Disconnect based on provider
+
+
 @app.route('/disconnect')
 def disconnect():
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
             gdisconnect()
-         # Reset the user's session:
+        # Reset the user's session:
             del login_session['access_token']
             del login_session['gplus_id']
             del login_session['username']
