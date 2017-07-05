@@ -8,67 +8,46 @@
             <h1 class="jumbotron-heading">{{shelter.name}}</h1>
         <p class="lead text-muted">{{shelter.address}}, {{shelter.state}} {{shelter.zipCode}}</p>
     
-      </div>
-    </section>
+
 
            <!--MESSAGE FLASHING
            "with" construct=> a block that does some automatic clean-up-->
            {% with messages = get_flashed_messages() %}
            {% if messages %}
 
-            <ul>
+            <p>
                 {% for message in messages %}
-                <li><Strong>{{message}}</Strong></li>
+                <Strong>{{message}}</Strong>
                 {% endfor %}
-            </ul>
+            </p>>
             {% endif %}
             {% endwith %}
-<div class="container-fluid">
-<div class="mx-auto" style="width:auto;">
-<div class="row ">
-           {% for i in puppies %}
 
+                  </div>
+    </section>
  
   <!-- Default panel contents -->
     
-    <div class="card col-md-4" >
-      
-      
-   
+   <section class="jumbotron text-center" id="jumbotron-main">
+      <div class="container row">
 
-  <!-- List group -->
-  <ul class="list-group list-group-item-success">
-    <li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=250px height=auto /></li>
-    <li class="list-group-item">ID: {{i.id}}</li>
-    <li class="list-group-item">Name: {{i.name}}</li>
-    <li class="list-group-item">Gender: {{i.gender}}</li>
-    <li class="list-group-item">Birthdate: {{i.dateOfBirth}}</li>
-    <li class="list-group-item">Weight: {{i.weight}}</li>
-   
-  </ul>
- <hr>
-  </div>
+      {% for i in puppies %}
+      <div class="card col-md-4" >
 
+      <!-- List group -->
+      <ul class="list-group list-group-item-success">
+        <li class="list-group-item"><img class="img-thumbnail" src={{i.picture}} alt={{i.name}}  /></li>
+        <li class="list-group-item">ID: {{i.id}}</li>
+        <li class="list-group-item">Name: {{i.name}}</li>
+        <li class="list-group-item">Gender: {{i.gender}}</li>
+        <li class="list-group-item">Birthdate: {{i.dateOfBirth}}</li>
+        <li class="list-group-item">Weight: {{i.weight}}</li>
+      
+      </ul>
+      </br>   
+      </div>
          {% endfor %}
-         
-  </div>
-  </div>    
-  </div>
-  </br>     
-{% endblock %}
-   
-  <!-- output = ''
-    for i in puppies:
-        
-        output += i.name
-        output += '</br>'
-        output += i.gender
-        output += '</br>'
-        output += str(i.weight)
-        output += '</br>'
-        # Some picture not shown, see puppypopulator.py file ==> puppy_images
-        output += '<img src="' + i.picture + '" height="100" width="100"/>'
-        output += '</br>'
-        output += '</br>'
-
-    return output -->
+  {% endblock %}
+      </div>
+    </section>
+ 

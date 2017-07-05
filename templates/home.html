@@ -9,11 +9,13 @@
             <h1 class="jumbotron-heading">{{shelter.name}}</h1>
         <p class="lead text-muted">{{shelter.address}}, {{shelter.state}} {{shelter.zipCode}}</p>
         <p>
-          <a class="btn btn-outline-primary" href='{{url_for('newPet', shelter_id = shelter.id) }}'>Add New Pet</a>
-          <a class="btn btn-outline-success "href='{{url_for('editShelter', shelter_id = shelter.id) }}'>Edit Shelter</a>
-          <a class="btn btn-outline-danger"href='{{url_for('deleteShelter', shelter_id = shelter.id) }}' >Delete Shelter</a>
-          
+          <div class="btn-group" role="group">
+          <a class="btn btn-outline-primary " href='{{url_for('newPet', shelter_id = shelter.id) }}'>Add</br>Pet</a>
+          <a class="btn btn-outline-success " href='{{url_for('editShelter', shelter_id = shelter.id) }}'>Edit</br>Shelter</a>
+          <a class="btn btn-outline-danger " href='{{url_for('deleteShelter', shelter_id = shelter.id) }}' >Delete</br> Shelter</a>
+          </div>
         </p>
+        
         <!--MESSAGE FLASHING
            "with" construct=> a block that does some automatic clean-up-->
            {% with messages = get_flashed_messages() %}
@@ -29,9 +31,8 @@
       </div>
     </section>
 
-<div class="container-fluid">
-<div class="mx-auto" style="width:auto;">
-<div class="row ">
+<section class="jumbotron text-center" id="jumbotron-main">
+            <div class="container row">
            {% for i in puppies %}
 
  
@@ -43,8 +44,8 @@
    
 
   <!-- List group -->
-  <ul class="list-group">
-    <div><li class="list-group-item"><img class="image-fluid" src={{i.picture}} alt={{i.name}} width=200px height=auto /></li></div>
+  <ul class="list-group list-group-item-success">
+    <div><li class="list-group-item"><img class="img-thumbnail" src={{i.picture}} alt={{i.name}} /></li></div>
     <li class="list-group-item">ID: {{i.id}}</li>
     <li class="list-group-item">Name: {{i.name}}</li>
     <li class="list-group-item">Gender: {{i.gender}}</li>
@@ -53,28 +54,11 @@
     <li class="list-group-item" ><a class="btn btn-outline-info "href='{{url_for('editPet', shelter_id = shelter.id, pet_id = i.id) }}'>Edit</a></li>
     <li class="list-group-item"><a class="btn btn-outline-danger"href='{{url_for('deletePet', shelter_id = shelter.id, pet_id = i.id) }}'>Delete</a></li>
   </ul>
- <hr>
+</br>
   </div>
 
          {% endfor %}
-         
-  </div>
-  </div>    
-  </div>
-  </br>     
+             
 {% endblock %}
-  <!-- output = ''
-    for i in puppies:
-        
-        output += i.name
-        output += '</br>'
-        output += i.gender
-        output += '</br>'
-        output += str(i.weight)
-        output += '</br>'
-        # Some picture not shown, see puppypopulator.py file ==> puppy_images
-        output += '<img src="' + i.picture + '" height="100" width="100"/>'
-        output += '</br>'
-        output += '</br>'
-
-    return output -->
+         </div>
+    </section>
