@@ -23,4 +23,4 @@ $ python project.py
 ```
 7. Access and test your application by visiting http://localhost:8000 locally
 
-######Note: The authentication system is based on Google OAuth 2.0
+###### Note: The authentication system is based on Google OAuth 2.0
