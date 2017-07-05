@@ -44,7 +44,7 @@ male_names = ["Bailey", "Max", "Charlie", "Buddy","Rocky","Jake", "Jack", "Toby"
 
 female_names = ['Bella', 'Lucy', 'Molly', 'Daisy', 'Maggie', 'Sophie', 'Sadie', 'Chloe', 'Bailey', 'Lola', 'Zoe', 'Abby', 'Ginger', 'Roxy', 'Gracie', 'Coco', 'Sasha', 'Lily', 'Angel', 'Princess','Emma', 'Annie', 'Rosie', 'Ruby', 'Lady', 'Missy', 'Lilly', 'Mia', 'Katie', 'Zoey', 'Madison', 'Stella', 'Penny', 'Belle', 'Casey', 'Samantha', 'Holly', 'Lexi', 'Lulu', 'Brandy', 'Jasmine', 'Shelby', 'Sandy', 'Roxie', 'Pepper', 'Heidi', 'Luna', 'Dixie', 'Honey', 'Dakota']
 
-puppy_images = ["https://goo.gl/TPw8w8", "https://goo.gl/WhXhQP","https://goo.gl/y8dexz","https://goo.gl/q1iRWH","https://goo.gl/jzS3pN","https://goo.gl/w9Nz62","https://goo.gl/2MdKbG","https://goo.gl/f1EBdY","https://goo.gl/mhakwE","https://goo.gl/Dk6M5c"]
+puppy_images = ["https://goo.gl/TPw8w8", "https://goo.gl/WhXhQP","https://goo.gl/y8dexz","https://goo.gl/q1iRWH","https://goo.gl/NQwtjN","https://goo.gl/VpzxkJ","https://goo.gl/2MdKbG","https://goo.gl/f1EBdY","https://goo.gl/mhakwE","https://goo.gl/Sqaf6j"]
 #This method will make a random age for each puppy between 0-18 months(approx.) old from the day the algorithm was run.
 def CreateRandomAge():
 	today = datetime.date.today()
