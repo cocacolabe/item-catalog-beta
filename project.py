@@ -272,7 +272,8 @@ def deleteShelter(shelter_id):
         session.delete(deletedShelter)
         session.commit()
         flash("Shelter has been deleted")
-        return redirect(url_for('shelterList', shelter_id=shelter_id))
+        # return redirect(url_for('shelterList', shelter_id=shelter_id))
+        return redirect(url_for('allShelterList'))
     else:
         return render_template('deleteshelter.html', i=deletedShelter)
 
