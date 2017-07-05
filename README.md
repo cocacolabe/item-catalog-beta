@@ -23,4 +23,11 @@ $ python project.py
 ```
 7. Access and test your application by visiting http://localhost:8000 locally
 
+
+
+#### Display US Adoption System V1.0 sample here (Video):
+
+[![US Adoption System V1.0](https://img.youtube.com/vi/I9CA57E_hq4/maxresdefault.jpg)](https://youtu.be/I9CA57E_hq4 "US Adoption System V1.0")
+
+
 ###### Note: The authentication system is based on Google OAuth 2.0
