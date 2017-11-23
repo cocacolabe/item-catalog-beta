@@ -3,7 +3,7 @@
 
 #### Description
 
-US Adoption System is an application provide a user registration and authentication system. Registered users will have the ability to post, edit and delete pet and shelter on the system. It also provides JSON to access API. 
+Developed a content management system using the Flask framework in Python. Authentication is provided via OAuth and all data is stored within a PostgreSQL database.
  
 #### How to open the file? 
 ######  (Example below will be using **vagrant**)
