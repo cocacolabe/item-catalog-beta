@@ -1,5 +1,5 @@
 
-# US Adoption System V1.0
+# Item Catalog - Udacity Project
 
 #### Description
 
