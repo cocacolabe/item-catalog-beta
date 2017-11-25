@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-        
-    </head>
-	<body class="body-adj">
-        <nav class="navbar fixed-top">
-            
-            <ul class="nav justify-content-end ">
-                <li class="nav-item col-md-10">
-                    <a class="nav-link active float-left" href="{{url_for('allShelterList')}}">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body class="body-adj">
+    <nav class="navbar fixed-top">
+
+        <ul class="nav justify-content-end ">
+            <li class="nav-item col-md-10">
+                <a class="nav-link active float-left" href="{{url_for('allShelterList')}}">
                     <i class="fa fa-codepen fa-2x" aria-hidden="true"></i> US Adoption System</a>
-                </li>
-                {% if 'username' not in session %}
-			    <li class="nav-item ">
-                    <a class="nav-link active" href="{{url_for('showLogin')}}">
+            </li>
+            {% if 'username' not in session %}
+            <li class="nav-item ">
+                <a class="nav-link active" href="{{url_for('showLogin')}}">
                     <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i> Login</a>
-                </li>
-			{% else %}
-            	<li class="nav-item ">
-                    <a class="nav-link active" href="{{url_for('disconnect')}}">
+            </li>
+            {% else %}
+            <li class="nav-item ">
+                <a class="nav-link active" href="{{url_for('disconnect')}}">
                     <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Logout</a>
-                </li>
-			
-			{% endif %}
-                
+            </li>
+
+            {% endif %}
 
         </ul>
 
-        </nav>
+    </nav>
 
-		<div class="container">
-			{% block content %}
-			{% endblock %}
-		</div>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <script src="https://use.fontawesome.com/3f132dd3ce.js"></script>
-        
-	</body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/3f132dd3ce.js"></script>
+
+</body>
+
 </html>
